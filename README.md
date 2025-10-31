@@ -1,6 +1,6 @@
-# Desafio Backend - Vinco
+# Algorítimos
 
-Este projeto foi desenvolvido como parte do desafio técnico de fundamentos backend para a Vinco. Todos os requisitos foram implementados utilizando **.NET 8** e **C#**, seguindo as melhores práticas de desenvolvimento.
+Este projeto foi desenvolvido como parte  técnico de fundamentos backend
 
 ---
 
@@ -71,6 +71,9 @@ Vinco/
 │   │   ├── Persistencia/                   # Seção 4: EF Core InMemory
 │   │   └── HttpClient/                     # Seção 4: Cliente HTTP resiliente
 │   └── DesafioAlgoritmo.Demo/              # Aplicação console de demonstração
+│       ├── Program.cs                      # Menu interativo principal (1224 linhas)
+│       ├── InterfaceConsole.cs             # Helpers para entrada/validação de dados
+│       └── MockDependenciaExterna.cs       # Mock de dependências externas
 └── tests/
     └── DesafioAlgoritmo.Tests/             # Testes automatizados completos
 ```
@@ -88,7 +91,7 @@ Demonstrar domínio de coleções, análise de complexidade e clareza na resolu�
 **Arquivo**: `src/DesafioAlgoritmo.Core/Algoritmos/AnalisadorSequencia.cs`
 
 ```csharp
-public static int? EncontrarPrimeiroRepetido(IEnumerable<int> numeros)
+public static long? EncontrarPrimeiroRepetido(IEnumerable<long> numeros)
 ```
 
 **Como funciona:**
@@ -105,6 +108,10 @@ public static int? EncontrarPrimeiroRepetido(IEnumerable<int> numeros)
 - `HashSet` oferece busca O(1), melhor que uma lista (O(n))
 - Algoritmo de passagem única é mais eficiente que comparações aninhadas O(n²)
 - Termina antecipadamente ao encontrar a primeira duplicata
+
+**Tipo de dados:**
+- Usa `long` (64 bits) para suportar números de -9.223.372.036.854.775.808 até 9.223.372.036.854.775.807
+- Previne `OverflowException` com números grandes
 
 #### 2. Maior Subsequência Consecutiva
 **Arquivo**: `src/DesafioAlgoritmo.Core/Algoritmos/AnalisadorSequencia.cs`
@@ -446,7 +453,6 @@ GET /metrics
 **Dashboards sugeridos:**
 - Tempo médio de processamento por operação
 - Taxa de sucesso/erro ao longo do tempo
-- Distribuição de latências (p50, p90, p99)
 
 ---
 
@@ -514,11 +520,6 @@ tests/DesafioAlgoritmo.Tests/
 # Todos os testes
 dotnet test
 
-# Com output detalhado
-dotnet test --logger "console;verbosity=detailed"
-
-# Apenas uma categoria
-dotnet test --filter "FullyQualifiedName~Algoritmos"
 ```
 
 ---
@@ -578,32 +579,3 @@ dotnet test --filter "FullyQualifiedName~Algoritmos"
 
 ---
 
-## Observações de Desenvolvimento
-
-**Tempo aproximado:** ~8 horas
-
-**Distribuição:**
-- Seção 1 (Algoritmos): 1h
-- Seção 2 (Concorrência): 1.5h
-- Seção 3 (Design): 1h
-- Seção 4 (Persistência/HTTP): 2h
-- Seção 5 (Observabilidade): 1h
-- Testes e documentação: 1.5h
-
-**Desafios encontrados:**
-- Garantir determinismo em testes concorrentes
-- Simular timeouts e retries de forma confiável
-- Manter código limpo sem comentários excessivos
-
----
-
-## Contato
-
-Para dúvidas sobre a implementação:
-- Email: [seu-email-aqui]
-
----
-
-## Licença
-
-Este projeto foi desenvolvido exclusivamente para o processo seletivo da Vinco.
